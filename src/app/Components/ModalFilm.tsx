@@ -19,7 +19,6 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
     }
 
     const deleteFromBucket = async () => {
-        console.log("TYT")
         if (!checkIsAlreadyInBucket()) {
             return;
         }
@@ -69,8 +68,6 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
         const updatedFavoriteUsers = Array.isArray(favoriteUsers)
             ? [...favoriteUsers, localStorage.getItem('email')]
             : [localStorage.getItem('email')];
-
-        console.log("upd: ", updatedFavoriteUsers)
 
         setFavoriteUsers(updatedFavoriteUsers);
 
@@ -177,7 +174,7 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
             </Modal.Body>
             <Modal.Footer style={{ display: "flex", justifyContent: "center", backgroundColor: "#f2f8ff"}}>
                 <Button variant='danger' onClick={deleteBook}>Delete</Button>
-                {isInBucket ? <Button onClick={deleteFromBucket} variant='warning'>Delete from bucket</Button> : <Button variant='success' onClick={addInBucket}>Add in Bucket</Button>}
+                {isInBucket ? <Button onClick={deleteFromBucket} variant='warning'>Delete from cart</Button> : <Button variant='success' onClick={addInBucket}>Add in cart</Button>}
                 <Button onClick={props.onHide}>Close</Button>
             </Modal.Footer>
         </Modal>

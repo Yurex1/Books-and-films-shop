@@ -1,6 +1,4 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-// components/HomePage.js
-/* eslint-disable react/react-in-jsx-scope */
+
 'use client';
 
 
@@ -62,7 +60,6 @@ const HomePage = () => {
   };
 
   return (
-    //@ts-ignore
     <Container style={containerStyle } >
       
       <h1 style={headingStyle}>Welcome to Film and Book Collection</h1>

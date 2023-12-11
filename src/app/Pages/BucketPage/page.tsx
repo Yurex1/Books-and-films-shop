@@ -2,7 +2,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import supabase from "@/app/supabase";
-import { Button } from "react-bootstrap";
 import MyCard from "@/app/Components/MyCard";
 import MyAddFilmModal from "@/app/Components/ModalAddFilm";
 
@@ -38,11 +37,11 @@ export default function FilmsPage() {
 
     const [allFilms, setAllFilms] = useState<Array<Film> | null>();
     const [allBooks, setAllBooks] = useState<Array<Book> | null>();
-    const [token, setToken] = useState<string | null>();
+    const [, setToken] = useState<string | null>();
     const [modalShow, setModalShow] = useState(false);
 
     const handleAllFilms = async () => {
-        const data = (await supabase.from('films').select('*')).data?.filter((el: Film) => el.favorite_users.includes(localStorage.getItem('email')!));
+        const data = (await supabase.from('films').select('*')).data?.filter((el: Film) => el.favorite_users?.includes(localStorage.getItem('email')!));
         if (data === null || data === undefined) {
             setAllFilms(null)
         } else {
@@ -57,7 +56,6 @@ export default function FilmsPage() {
         } else {
             setAllBooks(data);
         }
-        console.log("all books: ", allBooks, data)
     }
 
     function isTokenExpired(token: string | null) {
@@ -69,11 +67,8 @@ export default function FilmsPage() {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
             if (!decoded || !decoded.exp) {
-                // Invalid token format or missing expiration claim
                 return true;
             }
-
-            // Check if the token has expired (in seconds)
             const currentTimestamp = Math.floor(Date.now() / 1000);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
@@ -102,57 +97,48 @@ export default function FilmsPage() {
         if (!allFilms) {
             return null;
         }
-
+    
         const cardsPerRow = 4;
-        const cardRows = [];
+        const cardRows: JSX.Element[] = [];
+    
         for (let i = 0; i < allFilms.length; i += cardsPerRow) {
             const row = allFilms.slice(i, i + cardsPerRow);
             const cardElements = row.map((el: Film, index: number) => (
-                <td style={{ backgroundColor: "#F7efdc" }} key={index}>
+                <div key={index} style={{ backgroundColor: "#F7efdc", flex: 1, margin: "8px" }}>
                     <MyCard props={{ ...el, type: "Film" }} />
-                </td>
+                </div>
             ));
-            cardRows.push(<tr key={i}>{cardElements}</tr>);
+            cardRows.push(<div key={i} style={{ display: "flex", justifyContent: "center" }}>{cardElements}</div>);
         }
-        if(cardRows.length === 0) {
-            return null;
-        }
-        return cardRows;
-
+    
+        return cardRows.length === 0 ? null : cardRows;
     };
+    
 
     const renderBookCardRows = () => {
         if (!allBooks) {
             return null;
         }
-
+    
         const cardsPerRow = 4;
-        const cardRows = [];
+        const cardRows: JSX.Element[] = [];
+    
         for (let i = 0; i < allBooks.length; i += cardsPerRow) {
             const row = allBooks.slice(i, i + cardsPerRow);
             const cardElements = row.map((el: Book, index: number) => (
-                <td style={{ backgroundColor: "#F7efdc" }} key={index}>
+                <div key={index} style={{ backgroundColor: "#F7efdc", flex: 1, margin: "8px" }}>
                     <MyCard props={{ ...el, type: "Book" }} />
-                </td>
+                </div>
             ));
-            cardRows.push(<tr key={i}>{cardElements}</tr>);
+            cardRows.push(<div key={i} style={{ display: "flex", justifyContent: "center" }}>{cardElements}</div>);
         }
-        if(cardRows.length === 0) {
-            return null;
-        }
-        return cardRows;
+    
+        return cardRows.length === 0 ? null : cardRows;
     };
+    
 
     return (
         <>
-            {/* <Table>
-                <tbody style={{display: "flex", justifyContent: "center", alignItems: "center" , flexDirection: "column"}}>
-                <h1>Your favorite films:</h1>
-                    {renderFilmCardRows()}
-                    <h1>Your favorite books:</h1>
-                    {renderBookCardRows()}
-                </tbody>
-            </Table> */}
             <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
                 <h1>Your favorite films</h1>
                 {}
@@ -160,10 +146,7 @@ export default function FilmsPage() {
                 <h1>Your favorite books</h1>
                 {renderBookCardRows() ?? <h2>No books</h2>}
             </div>
-            
-            {// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            //@ts-expect-error
-            isTokenExpired(token) ? <></> : <Button variant="warning" style={{ position: "absolute", right: "2em" }} onClick={() => { setModalShow(true) }}>Add Film</Button>}
+                        
             <MyAddFilmModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

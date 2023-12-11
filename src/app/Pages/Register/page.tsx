@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+
 'use client'
 import { useState, useEffect } from 'react';
 import supabase from '@/app/supabase';
@@ -34,7 +35,7 @@ const RegistrationForm = () => {
             setMyError(error.message);
         }
         else {
-            router.push('Pages/Login')
+            router.push('Login')
         }
     }
 
@@ -49,7 +50,6 @@ const RegistrationForm = () => {
                 return true;
             }
 
-            // Check if the token has expired (in seconds)
             const currentTimestamp = Math.floor(Date.now() / 1000);
             //@ts-expect-error
             return decoded.exp < currentTimestamp;

@@ -1,4 +1,5 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
+
 'use client'
 import { useEffect, useState } from 'react';
 import supabase from '@/app/supabase';
@@ -25,15 +26,12 @@ const RegistrationForm = () => {
       !email || !password
 
     if (isAnyFieldEmpty) {
-      console.log("Please fill in all the required fields.");
-      // Update the validation status to highlight empty fields
       setValidationStatus({
         email: !!email,
         password: !!password
       });
       return;
     }
-    console.log("TYTa")
     const { data, error } = await supabase.auth.signInWithPassword({ email: email, password: password })
     if (data.session === null || data.user === null) {
       setValidationStatus({ email: false, password: false });
@@ -57,7 +55,6 @@ const RegistrationForm = () => {
         return true;
       }
 
-      // Check if the token has expired (in seconds)
       const currentTimestamp = Math.floor(Date.now() / 1000);
       //@ts-expect-error
       return decoded.exp < currentTimestamp;
@@ -68,7 +65,6 @@ const RegistrationForm = () => {
   }
 
   const handleUser = async () => {
-    const email = localStorage.getItem('email')
     const token = localStorage.getItem('token');
     if (isTokenExpired(token)) {
       return;
@@ -76,8 +72,6 @@ const RegistrationForm = () => {
     else {
       router.push('/Pages/FilmsPage');
     }
-
-    console.log("User1: ", email)
   }
 
   useEffect(() => { handleUser() }, [])

@@ -31,8 +31,6 @@ export default function MyAddBookModal(props) {
             !author || !title || !description || !genre || !publicationYear || !coverImageUrl;
 
         if (isAnyFieldEmpty) {
-            console.log("Please fill in all the required fields.");
-            // Update the validation status to highlight empty fields
             setValidationStatus({
                 author: !!author,
                 title: !!title,
@@ -61,7 +59,7 @@ export default function MyAddBookModal(props) {
                     },
                 });
             if (error) {
-                console.log("Error in uploading photo")
+                alert("Error in uploading photo")
             }
         }
 
@@ -76,7 +74,8 @@ export default function MyAddBookModal(props) {
                 cover_image_url: tempUrl,
             })
         if (error) {
-            console.log("Error in createing a book: ", error)
+            alert("Error while creating a book. Check logs")
+            console.log("Error in creating a book: ", error)
         }
         else {
             window.location.reload();

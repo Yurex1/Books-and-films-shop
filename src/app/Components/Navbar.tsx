@@ -13,9 +13,6 @@ import supabase from '../supabase';
 
 function MyNavbar() {
     const [userEmail, setUserEmail] = useState(null);
-    // const router = useRouter();
-
-
 
     const handleLogout = () => {
         supabase.auth.signOut();
@@ -33,11 +30,9 @@ function MyNavbar() {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
             if (!decoded || !decoded.exp) {
-                // Invalid token format or missing expiration claim
                 return true;
             }
-
-            // Check if the token has expired (in seconds)
+            
             const currentTimestamp = Math.floor(Date.now() / 1000);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error

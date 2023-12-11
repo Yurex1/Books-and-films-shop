@@ -8,7 +8,6 @@ import Feedback from 'react-bootstrap/esm/Feedback';
 import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 
 export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
-    // const {title, description, author, cover_image_url, genre,  publication_year} = props;
 
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
@@ -33,8 +32,6 @@ export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Om
             !director || !title || !description || !genre || !releaseYear || !coverImageUrl || !stars;
 
         if (isAnyFieldEmpty) {
-            console.log("Please fill in all the required fields.");
-            // Update the validation status to highlight empty fields
             setValidationStatus({
                 director: !!director,
                 title: !!title,
@@ -64,6 +61,7 @@ export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Om
                     },
                 });
             if (error) {
+
                 console.log("Error in uploading photo")
             }
         }
@@ -80,9 +78,11 @@ export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Om
                 cover_image_url: tempUrl,
             })
         if (error) {
-            console.log("Error in createing a book: ", error)
+            alert("Error while creating a film. Check logs")
+            console.log("Error in createing a film: ", error)
         }
         else {
+            alert("Success creating a film")
             window.location.reload();
         }
 
@@ -162,17 +162,16 @@ export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Om
                         Stars:
                     </InputGroup.Text>
                     <Form.Control
-                        as="textarea" // Use textarea instead of input
-                        rows={3}      // Set the number of visible rows
+                        as="textarea" 
+                        rows={3} 
                         aria-label="Default"
                         isInvalid={!validationStatus.stars}
                         onChange={(e) => {
                             const input = e.target.value;
                             const starsArray = input
                                 .split(/[\n, ]+/)
-                                .filter((star) => star.trim() !== ''); // Remove empty strings after splitting
+                                .filter((star) => star.trim() !== '');
                             setStars(starsArray);
-                            console.log("stars: ", stars)
                         }
                         }
                         aria-describedby="inputGroup-sizing-default"

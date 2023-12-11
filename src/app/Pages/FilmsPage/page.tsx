@@ -34,7 +34,6 @@ export default function FilmsPage() {
         } else {
             setAllFilms(data);
         }
-        console.log("all Films: ", allFilms, data)
     }
 
     function isTokenExpired(token: string | null) {
@@ -46,11 +45,9 @@ export default function FilmsPage() {
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
             if (!decoded || !decoded.exp) {
-                // Invalid token format or missing expiration claim
                 return true;
             }
 
-            // Check if the token has expired (in seconds)
             const currentTimestamp = Math.floor(Date.now() / 1000);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
@@ -78,23 +75,23 @@ export default function FilmsPage() {
         if (!allFilms) {
             return null;
         }
-
+    
         const cardsPerRow = 4;
-        const cardRows = [];
+        const cardRows: JSX.Element[] = [];
+    
         for (let i = 0; i < allFilms.length; i += cardsPerRow) {
             const row = allFilms.slice(i, i + cardsPerRow);
             const cardElements = row.map((el: Film, index: number) => (
-                <td key={index} style={{backgroundColor: "#F7efdc"}}>
-                    <MyCard props={{...el, type: "Film"}} />
-                </td>
+                <div key={index} style={{ flex: 1, margin: "8px", backgroundColor: "#F7efdc" }}>
+                    <MyCard props={{ ...el, type: "Film" }} />
+                </div>
             ));
-            cardRows.push(<tr style={{ display: "flex", justifyContent: "space-around" }} key={i}>{cardElements}</tr>);
+            cardRows.push(<div key={i} style={{ display: "flex", justifyContent: "space-around" }}>{cardElements}</div>);
         }
-        if(cardRows.length === 0) {
-            return null;
-        }
-        return cardRows;
+    
+        return cardRows.length === 0 ? null : cardRows;
     };
+    
 
     return (
         <>
