@@ -115,7 +115,7 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
                             {author ?? <>Unknown</>}
                         </div>
                     </div>
-                    <hr />
+                    <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
                             Genre
@@ -124,7 +124,7 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
                             {genre ?? <>Unknown</>}
                         </div>
                     </div>
-                    <hr />
+                    <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
                             Publication date
@@ -134,6 +134,7 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
                         </div>
                     </div>
                 </div>
+                <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
                 <div style={{ display: "flex", justifyContent: "center" }}>
                     <div>
                         <strong>Description:</strong>
