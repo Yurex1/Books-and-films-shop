@@ -13,7 +13,7 @@ function MyCard(props: { props: { type: any; title?: any; description?: any; cov
 
   return (
     <>
-      <Card style={{ width: '18rem', height: '20rem', backgroundColor: "#f2f2f2", borderRadius: '15px' }}>
+      <Card style={{ width: '18rem', height: '24rem', backgroundColor: "#f2f2f2", borderRadius: '15px' }}>
         <Card.Img variant="top" src={cover_image_url === null ? '' : cover_image_url} style={{ objectFit: 'cover', height: '50%' }} />
         <Card.Body style={{ display: "flex", justifyContent: "space-between", flexDirection: "column", padding: '1rem'  }}>
           <div style={{display: "flex", flexDirection: "column"}}>
