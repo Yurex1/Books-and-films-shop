@@ -73,7 +73,7 @@ export default function ModalFilm(props) {
 
         setFavoriteUsers(updatedFavoriteUsers);
 
-        const { data, error } = await supabase
+        const { error } = await supabase
             .from('films')
             .update({ favorite_users: updatedFavoriteUsers })
             .eq('id', id);

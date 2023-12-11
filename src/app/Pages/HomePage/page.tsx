@@ -3,7 +3,7 @@
 'use client';
 
 import React from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 const HomePage = () => {
   const containerStyle = {

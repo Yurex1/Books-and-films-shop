@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import supabase from "@/app/supabase";
-import { Button, Table } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import MyCard from "@/app/Components/MyCard";
 import MyAddFilmModal from "@/app/Components/ModalAddFilm";
 

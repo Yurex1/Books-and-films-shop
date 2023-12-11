@@ -1,6 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 'use client'
-import { Button, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown, DropdownButton } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
