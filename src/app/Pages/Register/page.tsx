@@ -11,16 +11,28 @@ import jwt from 'jsonwebtoken'
 const RegistrationForm = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [repeatedPassword, setRepeatedPassword] = useState('');
     const [myError, setMyError] = useState('');
+
     const [validationStatus, setValidationStatus] = useState({
         email: true,
         password: true,
+        confirmedPassword: true,
     })
     const router = useRouter();
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const handleRegister = async (e: any) => {
         e.preventDefault();
+        if(password !== repeatedPassword) {
+          setValidationStatus({
+            email: true,
+            password: false,
+            confirmedPassword: false,
+          });
+        // setMyError("Passwords are not identical");
+        return;
+        }
         const { error } = await supabase.auth.signUp({
             email: email,
             password: password,
@@ -31,6 +43,7 @@ const RegistrationForm = () => {
             setValidationStatus({
                 email: false,
                 password: false,
+                confirmedPassword: false,
             })
             setMyError(error.message);
         }
@@ -97,6 +110,19 @@ const RegistrationForm = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
             <Form.Control.Feedback type="invalid">{myError}</Form.Control.Feedback>
+            <Form.Text className="text-muted" />
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword"  style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              isInvalid={!validationStatus.confirmedPassword}
+              type="password"
+              placeholder="Repeat your password"
+              style={{width: "30%", marginLeft: 'auto', marginRight: 'auto'}}
+              onChange={(e) => setRepeatedPassword(e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid">Password are not identical</Form.Control.Feedback>
             <Form.Text className="text-muted" />
           </Form.Group>
           <br />
