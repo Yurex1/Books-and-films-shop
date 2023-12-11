@@ -105,7 +105,7 @@ export default function BooksPage() {
                 </tbody>
             </Table> */}
             <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
-                <h1>Your favorite books</h1>
+                <h1>All books</h1>
                 {renderCardRows() ?? <h2>No books</h2>}
             </div>
 

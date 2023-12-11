@@ -96,7 +96,7 @@ export default function FilmsPage() {
     return (
         <>
             <div style={{display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center"}}>
-                <h1>Your favorite films</h1>
+                <h1>All films</h1>
                 
                 {renderCardRows() ?? <h2>No films</h2>}
             </div>
