@@ -130,7 +130,7 @@ export default function FilmsPage() {
             const row = allBooks.slice(i, i + cardsPerRow);
             const cardElements = row.map((el: Book, index: number) => (
                 <div key={index} style={{ backgroundColor: "#F7efdc", flex: 1, margin: "8px" }}>
-                    <MyCard props={{ ...el, type: "Book" }} />
+                    <MyCard props={{ ...el, type: "Book", from: "Bucket" }} />
                 </div>
             ));
             cardRows.push(<div key={i} style={{ display: "flex", justifyContent: "center" }}>{cardElements}</div>);

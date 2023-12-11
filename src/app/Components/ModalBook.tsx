@@ -6,6 +6,8 @@ import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 
 export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: React.RefObject<HTMLDivElement> | ((instance: HTMLDivElement | null) => void) | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
     const [favoriteUsers, setFavoriteUsers] = useState<Array<string | null>>([]);
+    const { id, title, description, author, cover_image_url, genre, publication_year, favorite_users } = props.props;
+
     const [isInBucket, setInBucket] = useState(false);
     const deleteBook = async () => {
         const { error } = await supabase
@@ -17,11 +19,10 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
             console.log("Error while deleting a card")
         }
         else {
-            window.location.reload();
+                window.location.reload();
         }
     }
 
-    const { id, title, description, author, cover_image_url, genre, publication_year, favorite_users } = props.props;
     
     useEffect(() => {
         if (favorite_users) {
@@ -47,7 +48,6 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
         }
 
         const updatedFavoriteUsers = Array.isArray(favoriteUsers) ? favoriteUsers.filter((el: string | null) => el !== localStorage.getItem('email')) : [];
-        
         const { error } = await supabase
             .from('book')
             .update({ favorite_users: updatedFavoriteUsers })
