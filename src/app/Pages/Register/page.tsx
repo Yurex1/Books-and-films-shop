@@ -1,0 +1,109 @@
+'use client'
+import { useState, useEffect } from 'react';
+import supabase from '@/app/supabase';
+import React from 'react';
+import { Button, Container, Form } from 'react-bootstrap';
+import { useRouter } from "next/navigation";
+import jwt from 'jsonwebtoken'
+
+const RegistrationForm = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [myError, setMyError] = useState('');
+    const [validationStatus, setValidationStatus] = useState({
+        email: true,
+        password: true,
+    })
+    const router = useRouter();
+
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const handleRegister = async (e: any) => {
+        e.preventDefault();
+        const { error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            
+        })
+        
+        if (error) {
+            setValidationStatus({
+                email: false,
+                password: false,
+            })
+            setMyError(error.message);
+        }
+        else {
+            router.push('Pages/Login')
+        }
+    }
+
+    function isTokenExpired(token: string | null) {
+        if (token === null) {
+            return true;
+        }
+        try {
+            const decoded = jwt.decode(token);
+            if (!decoded || !decoded.exp) {
+                // Invalid token format or missing expiration claim
+                return true;
+            }
+
+            // Check if the token has expired (in seconds)
+            const currentTimestamp = Math.floor(Date.now() / 1000);
+            return decoded.exp < currentTimestamp;
+        } catch (error) {
+
+            return true;
+        }
+    }
+    const handleUser = async () => {
+        const token = localStorage.getItem('token');
+        if (isTokenExpired(token)) {
+            return;
+        }
+        else {
+            router.push('/Pages/FilmsPage');
+        }
+
+        
+    }
+
+    useEffect(() => { handleUser() }, [])
+
+    return (
+        <Container style={{textAlign: 'center', marginTop: '50px', justifyContent: "center", alignItems: "center"}}>
+      <h1>Register</h1>
+        <Form onSubmit={handleRegister} style={{display: "flex",flexDirection: "column", justifyContent: "center"}}>
+          <Form.Group className="mb-3" controlId="formBasicEmail" style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              isInvalid={!validationStatus.email}
+              type="email"
+              placeholder="Enter email"
+              onChange={(e) => setEmail(e.target.value)}
+              style={{width: "30%", marginLeft: 'auto', marginRight: 'auto'}}
+            />
+            <Form.Text className="text-muted" />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword"  style={{display: "flex", justifyContent: "center", flexDirection: "column"}}>
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              isInvalid={!validationStatus.password}
+              type="password"
+              placeholder="Enter password"
+              style={{width: "30%", marginLeft: 'auto', marginRight: 'auto'}}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <Form.Control.Feedback type="invalid">{myError}</Form.Control.Feedback>
+            <Form.Text className="text-muted" />
+          </Form.Group>
+          <br />
+          <Button variant="primary" type="submit" style={{backgroundColor: "#2f5232", width: "30%", marginLeft: 'auto', marginRight: 'auto'}}>
+            Submit
+          </Button>
+        </Form>
+      </Container>
+    );
+};
+
+export default RegistrationForm;
