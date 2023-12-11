@@ -22,7 +22,7 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
     }
 
     const { id, title, description, author, cover_image_url, genre, publication_year, favorite_users } = props.props;
-
+    
     useEffect(() => {
         if (favorite_users) {
             setFavoriteUsers(favorite_users);

@@ -8,7 +8,7 @@ import ModalFilm from './ModalFilm';
 function MyCard(props: { props: { type: any; title?: any; description?: any; cover_image_url?: any; from?: string }; }) {
   const [modalShow, setModalShow] = useState(false);
   const { type, title, description, cover_image_url } = props.props;
-
+  
   const truncatedDescription = description ? description.slice(0, 80) + (description.length > 80 ? '...' : '') : '';
 
   return (

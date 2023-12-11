@@ -7,8 +7,9 @@ import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
     const [favoriteUsers, setFavoriteUsers] = useState<Array<string | null>>([]);
     const [isInBucket, setInBucket] = useState(false);
-    const { id, title, description, cover_image_url, genre, publication_year, director, stars, favorite_users } = props.props;
-
+    const [allStars, setAllStars] = useState<Array<string> | null>(null);
+    const { id, title, description, cover_image_url, genre, release_year, director, stars, favorite_users } = props.props;
+    console.log("ss: ", stars)
     const checkIsAlreadyInBucket = () => {
         if (favorite_users && favorite_users.includes(localStorage.getItem('email')) || favoriteUsers && favoriteUsers.includes(localStorage.getItem('email'))) {
             setInBucket(true);
@@ -59,6 +60,7 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
         if (favorite_users) {
             setFavoriteUsers(favorite_users);
         }
+        setAllStars(stars);
         checkIsAlreadyInBucket();
     }, [favorite_users]);
 
@@ -134,7 +136,7 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
                             Stars:
                         </div>
                         <div>
-                            {stars ?? <>Unknown</>}
+                            {allStars?.map((el: string, i:number) => {return (<span key={i}>`{el}`</span>)}) ?? <>Unknown</>}
                         </div>
                     </div>
                     <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
@@ -144,7 +146,7 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
                             Publication date
                         </div>
                         <div>
-                            {publication_year ?? <>Unknown</>}
+                            {release_year ?? <>Unknown</>}
                         </div>
                     </div>
                 </div>

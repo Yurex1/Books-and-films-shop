@@ -169,7 +169,7 @@ export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Om
                         onChange={(e) => {
                             const input = e.target.value;
                             const starsArray = input
-                                .split(/[\n, ]+/)
+                                .split(/[\n]+/)
                                 .filter((star) => star.trim() !== '');
                             setStars(starsArray);
                         }
