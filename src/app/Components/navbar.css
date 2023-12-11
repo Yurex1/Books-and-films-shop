@@ -1,9 +1,13 @@
 .custom-dropdownMy > button {
-    background-color: #2f5232 !important;
-  }
+  background-color: #2f5232 !important;
+}
 .custom-dropdownMy:hover > button {
-    background-color: #3e6f42 !important;
-  }
-  .custom-dropdownMy:active > button {
-    background-color: rgb(41, 74, 44) !important;
-  }
+  background-color: #3e6f42 !important;
+}
+.custom-dropdownMy:active > button {
+  background-color: rgb(41, 74, 44) !important;
+}
+
+.logout-button :active{
+  background-color: violet !important;
+}

@@ -32,7 +32,7 @@ function MyNavbar() {
             if (!decoded || !decoded.exp) {
                 return true;
             }
-            
+
             const currentTimestamp = Math.floor(Date.now() / 1000);
             // eslint-disable-next-line @typescript-eslint/ban-ts-comment
             //@ts-expect-error
@@ -76,7 +76,7 @@ function MyNavbar() {
                                 Register
                             </Nav.Link></> : 
                     <DropdownButton variant="secondary"  title={localStorage.getItem('email')} className='custom-dropdownMy'>
-                                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
+                                <Dropdown.Item onClick={handleLogout} className='logout-button' style={{backgroundColor: "#e8ded3"}}>Logout</Dropdown.Item>
                                 
                         </DropdownButton>
                         }
