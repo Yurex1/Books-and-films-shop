@@ -7,7 +7,7 @@ import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
     const [favoriteUsers, setFavoriteUsers] = useState<Array<string | null>>([]);
     const [isInBucket, setInBucket] = useState(false);
-    const { id, title, description, author, cover_image_url, genre, publication_year, director, stars, favorite_users } = props.props;
+    const { id, title, description, cover_image_url, genre, publication_year, director, stars, favorite_users } = props.props;
 
     const checkIsAlreadyInBucket = () => {
         if (favorite_users && favorite_users.includes(localStorage.getItem('email')) || favoriteUsers && favoriteUsers.includes(localStorage.getItem('email'))) {
@@ -111,50 +111,40 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
                 <div>
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
-                            Автор
+                            Director
                         </div>
                         <div>
-                            {author ?? <>Невідомо</>}
-                        </div>
-                    </div>
-                    <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
-
-                    <div style={{ display: "flex", justifyContent: "space-around" }}>
-                        <div>
-                            Режисер
-                        </div>
-                        <div>
-                            {director ?? <>Невідомо</>}
+                            {director ?? <>Unknown</>}
                         </div>
                     </div>
                     <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
 
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
-                            Жанр
+                            Genre
                         </div>
                         <div>
-                            {genre ?? <>Невідомо</>}
-                        </div>
-                    </div>
-                    <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
-
-                    <div style={{ display: "flex", justifyContent: "space-around" }}>
-                        <div>
-                            Зірки:
-                        </div>
-                        <div>
-                            {stars ?? <>Невідомо</>}
+                            {genre ?? <>Unknown</>}
                         </div>
                     </div>
                     <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
 
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
-                            Рік видання
+                            Stars:
                         </div>
                         <div>
-                            {publication_year ?? <>Невідомо</>}
+                            {stars ?? <>Unknown</>}
+                        </div>
+                    </div>
+                    <hr style={{borderColor: "#fff", borderTop: "2px dashed #8c8b8b"}}/>
+
+                    <div style={{ display: "flex", justifyContent: "space-around" }}>
+                        <div>
+                            Publication date
+                        </div>
+                        <div>
+                            {publication_year ?? <>Unknown</>}
                         </div>
                     </div>
                 </div>

@@ -109,28 +109,28 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
                 <div>
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
-                            Автор
+                            Author
                         </div>
                         <div>
-                            {author ?? <>Невідомо</>}
-                        </div>
-                    </div>
-                    <hr />
-                    <div style={{ display: "flex", justifyContent: "space-around" }}>
-                        <div>
-                            Жанр
-                        </div>
-                        <div>
-                            {genre ?? <>Невідомо</>}
+                            {author ?? <>Unknown</>}
                         </div>
                     </div>
                     <hr />
                     <div style={{ display: "flex", justifyContent: "space-around" }}>
                         <div>
-                            Рік видання
+                            Genre
                         </div>
                         <div>
-                            {publication_year ?? <>Невідомо</>}
+                            {genre ?? <>Unknown</>}
+                        </div>
+                    </div>
+                    <hr />
+                    <div style={{ display: "flex", justifyContent: "space-around" }}>
+                        <div>
+                            Publication date
+                        </div>
+                        <div>
+                            {publication_year ?? <>Unknown</>}
                         </div>
                     </div>
                 </div>
