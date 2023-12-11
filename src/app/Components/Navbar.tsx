@@ -30,6 +30,8 @@ function MyNavbar() {
         }
         try {
             const decoded = jwt.decode(token);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
             if (!decoded || !decoded.exp) {
                 // Invalid token format or missing expiration claim
                 return true;
@@ -37,6 +39,8 @@ function MyNavbar() {
 
             // Check if the token has expired (in seconds)
             const currentTimestamp = Math.floor(Date.now() / 1000);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
             return decoded.exp < currentTimestamp;
         } catch (error) {
 
@@ -50,6 +54,8 @@ function MyNavbar() {
         if (isTokenExpired(token)) {
             setUserEmail(null);
         } else {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
             setUserEmail(email);
         }
     }, []);

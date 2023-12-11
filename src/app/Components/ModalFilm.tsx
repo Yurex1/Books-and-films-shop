@@ -1,9 +1,10 @@
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Modal, { ModalProps } from 'react-bootstrap/Modal';
 import React, { useEffect, useState } from 'react';
 import supabase from '../supabase';
+import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 
-export default function ModalFilm(props) {
+export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
     const [favoriteUsers, setFavoriteUsers] = useState<Array<string | null>>([]);
     const [isInBucket, setInBucket] = useState(false);
     const { id, title, description, author, cover_image_url, genre, publication_year, director, stars, favorite_users } = props.props;

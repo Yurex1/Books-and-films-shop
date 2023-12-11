@@ -1,12 +1,13 @@
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Modal, { ModalProps } from 'react-bootstrap/Modal';
 import React, { ChangeEvent, useState } from 'react';
 import { InputGroup, Form } from 'react-bootstrap';
 import supabase from '../supabase';
 import { uuid } from 'uuidv4';
 import Feedback from 'react-bootstrap/esm/Feedback';
+import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 
-export default function MyAddFilmModal(props) {
+export default function MyAddFilmModal(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: ((instance: HTMLDivElement | null) => void) | React.RefObject<HTMLDivElement> | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
     // const {title, description, author, cover_image_url, genre,  publication_year} = props;
 
     const [title, setTitle] = useState('');
@@ -56,6 +57,8 @@ export default function MyAddFilmModal(props) {
                 .upload(photoName, coverImageUrl, {
                     cacheControl: "3600",
                     upsert: false,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
                     headers: {
                         Authorization: localStorage.getItem('token')!,
                     },

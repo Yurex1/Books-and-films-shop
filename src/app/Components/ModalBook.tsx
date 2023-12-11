@@ -1,9 +1,10 @@
 import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import Modal, { ModalProps } from 'react-bootstrap/Modal';
 import React, { useEffect, useState } from 'react';
 import supabase from '../supabase';
+import { Omit, BsPrefixProps } from 'react-bootstrap/esm/helpers';
 
-export default function ModalBook(props) {
+export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Omit<React.DetailedHTMLProps<React.HTMLAttributes<HTMLDivElement>, HTMLDivElement>, "ref"> & { ref?: React.RefObject<HTMLDivElement> | ((instance: HTMLDivElement | null) => void) | null | undefined; }, BsPrefixProps<"div"> & ModalProps> & BsPrefixProps<"div"> & ModalProps & { children?: React.ReactNode; }) {
     const [favoriteUsers, setFavoriteUsers] = useState<Array<string | null>>([]);
     const [isInBucket, setInBucket] = useState(false);
     const deleteBook = async () => {

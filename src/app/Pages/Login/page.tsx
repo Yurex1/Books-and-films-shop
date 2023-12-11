@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 import { useEffect, useState } from 'react';
 import supabase from '@/app/supabase';
@@ -51,13 +52,14 @@ const RegistrationForm = () => {
     }
     try {
       const decoded = jwt.decode(token);
+      //@ts-expect-error
       if (!decoded || !decoded.exp) {
-        // Invalid token format or missing expiration claim
         return true;
       }
 
       // Check if the token has expired (in seconds)
       const currentTimestamp = Math.floor(Date.now() / 1000);
+      //@ts-expect-error
       return decoded.exp < currentTimestamp;
     } catch (error) {
 

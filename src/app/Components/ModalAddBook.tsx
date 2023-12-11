@@ -6,6 +6,8 @@ import supabase from '../supabase';
 import { uuid } from 'uuidv4';
 import Feedback from 'react-bootstrap/esm/Feedback';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+//@ts-expect-error
 export default function MyAddBookModal(props) {
 
     const [title, setTitle] = useState('');
@@ -52,6 +54,8 @@ export default function MyAddBookModal(props) {
                 .upload(photoName, coverImageUrl, {
                     cacheControl: "3600",
                     upsert: false,
+                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+                    //@ts-expect-error
                     headers: {
                         Authorization: localStorage.getItem('token')!,
                     },

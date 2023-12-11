@@ -1,12 +1,14 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 // components/HomePage.js
 /* eslint-disable react/react-in-jsx-scope */
 'use client';
+
 
 import React from 'react';
 import { Container } from 'react-bootstrap';
 
 const HomePage = () => {
-  const containerStyle = {
+  const containerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -18,14 +20,14 @@ const HomePage = () => {
     padding: '2rem',
   };
 
-  const headingStyle = {
+  const headingStyle: React.CSSProperties = {
     fontSize: '3rem',
     color: '#333',
     marginBottom: '1rem',
     textAlign: 'center',
   };
 
-  const paragraphStyle = {
+  const paragraphStyle: React.CSSProperties = {
     fontSize: '1.25rem',
     lineHeight: '1.5',
     marginBottom: '1.5rem',
@@ -34,7 +36,7 @@ const HomePage = () => {
 
   
 
-  const ctaContainerStyle = {
+  const ctaContainerStyle: React.CSSProperties = {
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
@@ -45,14 +47,14 @@ const HomePage = () => {
     boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
   };
 
-  const ctaHeadingStyle = {
+  const ctaHeadingStyle: React.CSSProperties = {
     fontSize: '2rem',
     color: '#333',
     marginBottom: '1rem',
     textAlign: 'center',
   };
 
-  const ctaParagraphStyle = {
+  const ctaParagraphStyle: React.CSSProperties = {
     fontSize: '1rem',
     lineHeight: '1.5',
     marginBottom: '1.5rem',
@@ -60,7 +62,9 @@ const HomePage = () => {
   };
 
   return (
+    //@ts-ignore
     <Container style={containerStyle } >
+      
       <h1 style={headingStyle}>Welcome to Film and Book Collection</h1>
       <p style={paragraphStyle}>
         This site is for people who love films and books. Explore our collection,

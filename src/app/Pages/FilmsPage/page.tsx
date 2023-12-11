@@ -43,6 +43,8 @@ export default function FilmsPage() {
         }
         try {
             const decoded = jwt.decode(token);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
             if (!decoded || !decoded.exp) {
                 // Invalid token format or missing expiration claim
                 return true;
@@ -50,6 +52,8 @@ export default function FilmsPage() {
 
             // Check if the token has expired (in seconds)
             const currentTimestamp = Math.floor(Date.now() / 1000);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
             return decoded.exp < currentTimestamp;
         } catch (error) {
 
@@ -99,7 +103,10 @@ export default function FilmsPage() {
                 
                 {renderCardRows() ?? <h2>No films</h2>}
             </div>
-            {isTokenExpired(token) ? <></> : <Button variant="warning" style={{ position: "absolute", right: "2em" }} onClick={() => { setModalShow(true) }}>Add Film</Button>}
+            {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            //@ts-expect-error
+            isTokenExpired(token) ? <></> : <Button variant="warning" style={{ position: "absolute", right: "2em" }} onClick={() => { setModalShow(true) }}>Add Film</Button>}
             <MyAddFilmModal
                 show={modalShow}
                 onHide={() => setModalShow(false)}

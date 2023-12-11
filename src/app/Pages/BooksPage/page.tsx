@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/ban-ts-comment */
 'use client'
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
@@ -23,7 +24,7 @@ export default function BooksPage() {
     const router = useRouter();
     const [allBooks, setAllBooks] = useState<Array<Book> | null>();
     const [modalShow, setModalShow] = useState(false);
-    const [token, setToken] = useState<string| null>();
+    const [token, setToken] = useState<string| null>(null);
     const handleAllBooks = async () => {
         const data = (await supabase.from('book').select('*')).data;
         if (data === null || data === undefined) {
@@ -40,6 +41,7 @@ export default function BooksPage() {
         }
         try {
             const decoded = jwt.decode(token);
+            //@ts-ignore
             if (!decoded || !decoded.exp) {
                 // Invalid token format or missing expiration claim
                 return true;
@@ -47,6 +49,7 @@ export default function BooksPage() {
 
             // Check if the token has expired (in seconds)
             const currentTimestamp = Math.floor(Date.now() / 1000);
+            //@ts-expect-error
             return decoded.exp < currentTimestamp;
         } catch (error) {
 
@@ -95,6 +98,7 @@ export default function BooksPage() {
                 {renderCardRows() ?? <h2>No books</h2>}
                 </tbody>
             </Table>
+            
             {isTokenExpired(token) ? <></> : <Button variant="warning" style={{ position: "absolute", right: "2em" }} onClick={() => { setModalShow(true) }}>Add Book</Button>}
             <MyAddBookModal show={modalShow}
                 onHide={() => setModalShow(false)} />

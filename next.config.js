@@ -1,4 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {}
 
-export default nextConfig
+// eslint-disable-next-line no-undef
+module.exports = nextConfig
