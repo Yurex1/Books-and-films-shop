@@ -29,7 +29,7 @@ export default function FilmsPage() {
 
     const handleAllFilms = async () => {
         const data = (await supabase.from('films').select('*')).data;
-        if (data === null || data === undefined || data.length === 1) {
+        if (data === null || data === undefined) {
             setAllFilms(null)
         } else {
             setAllFilms(data);

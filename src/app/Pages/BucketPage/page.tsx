@@ -41,7 +41,8 @@ export default function FilmsPage() {
     const [modalShow, setModalShow] = useState(false);
 
     const handleAllFilms = async () => {
-        const data = (await supabase.from('films').select('*')).data?.filter((el: Film) => el.favorite_users?.includes(localStorage.getItem('email')!));
+        const email = localStorage.getItem('email');
+        const data = (await supabase.from('films').select('*').filter('favorite_users', 'cs', `{${email}}`)).data;
         if (data === null || data === undefined) {
             setAllFilms(null)
         } else {
@@ -50,7 +51,8 @@ export default function FilmsPage() {
     }
 
     const handleAllBooks = async () => {
-        const data = (await supabase.from('book').select('*')).data;
+        const email = localStorage.getItem('email');
+        const data = (await supabase.from('book').select('*').filter('favorite_users', 'cs', `{${email}}`)).data;
         if (data === null || data === undefined) {
             setAllBooks(null)
         } else {
@@ -105,7 +107,8 @@ export default function FilmsPage() {
             const row = allFilms.slice(i, i + cardsPerRow);
             const cardElements = row.map((el: Film, index: number) => (
                 <div key={index} style={{ backgroundColor: "#F7efdc", flex: 1, margin: "8px" }}>
-                    <MyCard props={{ ...el, type: "Film" }} />
+                    <MyCard props={{ ...el, type: "Film", from: "Bucket" }} />
+
                 </div>
             ));
             cardRows.push(<div key={i} style={{ display: "flex", justifyContent: "center" }}>{cardElements}</div>);

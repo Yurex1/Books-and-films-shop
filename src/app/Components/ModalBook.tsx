@@ -58,7 +58,8 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
             setInBucket(false);
             setFavoriteUsers(updatedFavoriteUsers)
             alert("Successfully deleted from bucket")
-
+            if(props.props.from === 'Bucket')
+                window.location.reload();
         }
     }
 
@@ -84,7 +85,6 @@ export default function ModalBook(props: React.JSX.IntrinsicAttributes & Omit<Om
             setFavoriteUsers(updatedFavoriteUsers)
             setInBucket(true);
             alert("Successfully added in bucket")
-
         }
     }
 

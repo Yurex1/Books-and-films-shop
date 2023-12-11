@@ -34,6 +34,8 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
             setInBucket(false);
             alert("Successfully deleted from bucket")
             setFavoriteUsers(updatedFavoriteUsers)
+            if(props.props.from === 'Bucket')
+                window.location.reload();
         }
     }
 
@@ -81,8 +83,8 @@ export default function ModalFilm(props: React.JSX.IntrinsicAttributes & Omit<Om
         } else {
             alert("Successfully added in bucket")
             setInBucket(true);
-            setFavoriteUsers(updatedFavoriteUsers)
             
+            setFavoriteUsers(updatedFavoriteUsers)
         }
     }
 
