@@ -22,7 +22,7 @@ interface Book {
 
 export default function BooksPage() {
     const router = useRouter();
-    const [allBooks, setAllBooks] = useState<Array<Book> | null>();
+    const [allBooks, setAllBooks] = useState<Array<Book> | null>(null);
     const [modalShow, setModalShow] = useState(false);
     const [token, setToken] = useState<string | null>(null);
     const handleAllBooks = async () => {
