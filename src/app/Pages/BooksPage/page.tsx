@@ -71,27 +71,29 @@ export default function BooksPage() {
 
     const renderCardRows = () => {
         if (!allBooks) {
-            return <h2>No books</h2>;
+            return null;
         }
     
         const cardsPerRow = 4;
+        const cardRows: JSX.Element[] = [];
     
-        return allBooks.reduce((rows: JSX.Element[][], el: Book, index: number) => {
-            if (index % cardsPerRow === 0) {
-                rows.push([]);
-            }
-            rows[rows.length - 1].push(
-                <div key={index} style={{ backgroundColor: "#F7efdc", flex: 1, margin: "8px" }}>
+        for (let i = 0; i < allBooks.length; i += cardsPerRow) {
+            const row = allBooks.slice(i, i + cardsPerRow);
+            const cardElements = row.map((el: Book, index: number) => (
+                <div key={index} style={{ flex: 1, margin: "8px", backgroundColor: "#F7efdc" }}>
                     <MyCard props={{ ...el, type: "Book" }} />
                 </div>
+            ));
+            cardRows.push(
+                <div key={i} style={{ display: "flex", justifyContent: "space-around" }}>
+                    {cardElements}
+                </div>
             );
-            return rows;
-        }, []).map((row, rowIndex) => (
-            <div key={rowIndex} style={{ display: "flex", justifyContent: "center" }}>
-                {row}
-            </div>
-        ));
+        }
+    
+        return cardRows.length === 0 ? null : cardRows;
     };
+    
     
 
     return (
